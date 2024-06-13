@@ -59,11 +59,9 @@ cd -
 ```
 
 ### Initial checks before running the code
-Please make sure the "CARLA_ROOT" ("./carla_server" by default) and "KING_ROOT" (if present) environment variables are set correctly in all the bash scripts.
+Please make sure the "CARLA_ROOT" ("./carla_server" by default) and "KING_ROOT" (if present) environment variables are set correctly in all the bash scripts. The following script will generate a scenario with modifications, calculates the collision rate, and based on this rate, simplifies the scenario using a delta debugging algorithm and finds the true minimum set of scenario entities required to induce the same failure as original scenario. 
 
 ## How to run
-The following script will generate a scenario with modifications, calculates the collision rate, and based on this rate, simplifies the scenario using a delta debugging algorithm and finds the true minimum set of scenario entities required to induce the same failure as original scenario. 
-
 The `generate_scenarios.py` script configures the environment using settings from `config.py`. The config.py configures the CARLA simulation environment based on the input configuration obtained from dd.py, the delta debugging algorithm. Initially, `dd.py` receives an initial test input that includes all specified IDs (entire sequence). The delta debugging algorithm within `dd.py` automatically launches the CARLA simulator, executes bash scripts based on the number of agents specified in the input sequence, and generates a scenario under the configured environment settings. It then computes the "collision_rate". If the collision rate is greater than 0, indicating successful recreation of the scenario, the delta debugging algorithm returns PASS. If the collision rate is 0, indicating a failure to recreate the scenario, it returns FAIL. Upon detecting an error, the algorithm tests the complement of the input. If the complement successfully passes, it reduces granularity and continues this process until it identifies the minimum set of entities that reproduce the failure. Conversely, if the complement fails, it increases granularity and repeats the process until achieving a PASS. This iterative refinement continues until the algorithm identifies the smallest set of inputs that reliably reproduce the original scenario's failure. Each minimized test input iteration is stored in `test_input.json`. This file configures subsequent runs of the CARLA simulation environment for further testing by the delta debugging algorithm, which verifies the collision_rate. The process persists until the minimum set of entities causing the original failure is identified. 
 
 #### Note
@@ -71,8 +69,8 @@ The CARLA simulator and bash scripts are automated to streamline the testing pro
 
 Additionally, an important consideration is that the traffic light configurations change each time the world is loaded without closing CARLA. To maintain consistency and avoid issues with the changing of traffic light IDs, it's preferable to reload CARLA for each test input. Although one possible solution is to access traffic light IDs based on their location, but still remaining drawbacks prevail. Therefore, the decision was made to reload CARLA for every test input to ensure reliable and consistent simulation results.
 
-#### dd.py 
-Run dd.py, and for the selected scenario, the minized inoput is shown below. 
+#### Run dd.py 
+The `dd.py` script concurrently executes `generate_scenario.py`, `config.py`, and bash scripts specific to the chosen scenario. It then returns the minimized input shown below. 
 
 ![alt text](https://github.com/SanjeethaPennada/King-Replay/blob/main/Images/output.png)
 
