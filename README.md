@@ -1,4 +1,4 @@
-# Replay of "KING" 
+# Scenario Simplification 
 
 ## Requirements
 
@@ -11,8 +11,6 @@
 - Ubuntu 20.04
 - nvidia driver
 - CARLA 0.9.15
-
-Here's the [Step by step process to replay KING with modifications](https://github.com/SanjeethaPennada/King-Replay/blob/main/Step%20by%20step%20process%20to%20replay%20KING%20with%20modifications%20.pdf) 
 
 ## Setup
 Clone the repo
@@ -61,7 +59,6 @@ cd -
 ```
 
 ## How to run
-
 ### Scenario Replay
 We provide a bash script for convenience. Please make sure the "CARLA_ROOT" ("./carla_server" by default) and "KING_ROOT" (if present) environment variables are set correctly in all of those scripts.
 
@@ -77,19 +74,18 @@ nohup carla_server/CarlaUE4.sh
 Following script will run generation and automatically replay scenario with modifications and detect collisions. 
 
 ##### TransFuser generation
-For Transfuser generation using both gradient paths, open run_generation_transfuser.sh, change number of agents to 1 or 2 or 4 based on your choice (default = 4 agents) and run:
+For Transfuser generation using both gradient paths, open run_generation_transfuser_both_paths.sh, change number of agents to 2 or 4 based on your choice (default = 4 agents), and run:
 ```Shell
-bash run_generation_transfuser.sh
+bash run_generation_transfuser_both_paths.sh
 ```
 
 #### Getting results
 ```Shell
-generation_results_transfuser/
+generation_results_transfuser_both_paths/
 ├── agents_4
-    ├── RouteScenario_136_to_136
+    ├── RouteScenario_197_to_197
     │   ├── results.json
     │   └── scenario_records.json
-    ...
     ├── opt.pkl
     └── opt.txt
 ```
@@ -105,21 +101,19 @@ First spin up a carla server in a separate shell:
 ```Shell
 carla_server/CarlaUE4.sh 
 ```
-Run the following script. The default directory is set to "generation_results_transfuser".
+Run the following script. The default directory is set to "generation_results_transfuser_both_paths".
 ```Shell
-bash run_visualization.sh generation_results_transfuser
+bash run_visualization.sh generation_results_transfuser_both_paths
 ```
 
 #### Getting results
 ```Shell
-generation_results_transfuser/
+generation_results_transfuser_both_paths/
 └── agents_4
-    ├── RouteScenario_136_to_136
-    │   ├── RouteScenario_136_iter_0.gif
+    ├── RouteScenario_197_to_197
+    │   ├── RouteScenario_197_iter_0.gif
     │   ├── results.json
     │   └── scenario_records.json
-   
-    ...
     ├── opt.pkl
     └── opt.txt
 ```
