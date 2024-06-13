@@ -9,7 +9,6 @@ PASS = 0  # Able to recreate the same scenario
 FAIL = 1  # Failed to recreate the same scenario
 
 #Define various lists of entities that can be manipulated in the simulation
-
 #Define the building ids that should be removed in the selected scenario (Town 3, 197 route ID) 
 building_ids = [6624907388525486529, 5590853173915701067, 11595376130058892747, 11261989655324469416, 10827724883280509631, 18345568482389893230, 1580899482231826983, 1760263306195875505, 12193930106007007199, 8965582157476607102, 2012950392265273169, 8202849075528332341, 6570133562374327036, 8588501765608435261, 3725429243769496776, 12942124512259043244, 4899373996816986076, 7783727404168196753, 1601677913125771255, 4983866454221917867, 793883526509223864, 11096794554960802340, 18125725892881901402, 9314362118298296807, 10311091484298245286, 12405707544884411272, 14597101749787311194, 1437529571490662170, 160167791312577125, 12317005202958092029, 2630081664371749371, 2795511079265638899, 17619596962267012938, 12253574462247490343, 3709560905934411224]
 
@@ -25,22 +24,20 @@ streetlight_ids = [73, 72, 71, 70, 69, 68, 61, 50, 40, 24, 26, 25, 27, 130, 456,
 
 #Delta debugging algorithm 
 def ddmin(test, inp, *test_args):
-
-    """
-    Delta debugging algorithm is used to minimize the input that still causes a test to fail.
-
-    Args:
-    test (function): A function that tests an input and returns either PASS or FAIL.
-    inp (list): The initial input list that causes the test to fail.
-    test_args: Additional optional arguments that may be required by the test function.
-
-    Returns:
-    list: The minimized set, i.e., the smallest possible subset of the entities that still causes the test to fail.
-    """
-    
-    # Assert that the initial input causes the test to fail
     assert test(inp, *test_args) != FAIL #ensures that the initial input indeed causes the test to fail. If this assertion fails, it means the input provided does not trigger the error, and there is no need to minimize it.
     
+
+    #Delta debugging algorithm is used to minimize the input that still causes a test to fail.
+    # #Args:
+    #test (function): A function that tests an input and returns either PASS or FAIL.
+    #inp (list): The initial input list that causes the test to fail.
+    #test_args: Additional optional arguments that may be required by the test function.
+
+    #Returns:
+    #list: The minimized set, i.e., the smallest possible subset of the entities that still causes the test to fail.
+  
+    
+
     n = 2 # Initial granularity: start by dividing the input into two parts
     step_count = 1 # Counter for logging steps
     print("Step | Subsequence                              | Error Triggered")
@@ -78,15 +75,14 @@ def ddmin(test, inp, *test_args):
 
 def test_function(inp): 
 
-    """
-    Tests whether a given input configuration causes a collision in a simulation.
+    #Tests whether a given input configuration causes a collision in a simulation.
 
-    Args:
-    inp (list): List of entities that will be tested.
+    #Args:
+    #inp (list): List of entities that will be tested.
 
-    Returns:
-    int: PASS if the collision rate is greater than 0; otherwise, FAIL.
-    """
+    #Returns:
+    #int: PASS if the collision rate is greater than 0; otherwise, FAIL.
+    
     
     try:
     
@@ -102,15 +98,14 @@ def test_function(inp):
 
 def get_collision_rate(inp):
 
-    """
-    Calculates the collision rate for a given input configuration in a simulation.
+    #Calculates the collision rate for a given input configuration in a simulation.
 
-    Args:
-    inp (list): List of entities that will be tested.
+    #Args:
+    #inp (list): List of entities that will be tested.
 
-    Returns:
-    float: The collision rate extracted from the simulation's output.
-    """
+    #Returns:
+    #float: The collision rate extracted from the simulation's output.
+ 
     
     # Save the input parameters to a JSON file
     with open('test_input.json', 'w') as f:
