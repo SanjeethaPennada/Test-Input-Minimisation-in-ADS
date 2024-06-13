@@ -74,14 +74,14 @@ nohup carla_server/CarlaUE4.sh
 Following script will run generation and automatically replay scenario with modifications and detect collisions. 
 
 ##### TransFuser generation
-For Transfuser generation using both gradient paths, open run_generation_transfuser_both_paths.sh, change number of agents to 2 or 4 based on your choice (default = 4 agents), and run:
+For Transfuser generation using both gradient paths, open run_generation_transfuser.sh, change number of agents to 2 or 4 based on your choice (default = 4 agents), remove --config and run:
 ```Shell
 bash run_generation_transfuser_both_paths.sh
 ```
 
 #### Getting results
 ```Shell
-generation_results_transfuser_both_paths/
+generation_results_transfuser/
 ├── agents_4
     ├── RouteScenario_197_to_197
     │   ├── results.json
@@ -101,14 +101,14 @@ First spin up a carla server in a separate shell:
 ```Shell
 carla_server/CarlaUE4.sh 
 ```
-Run the following script. The default directory is set to "generation_results_transfuser_both_paths".
+Run the following script. The default directory is set to "generation_results_transfuser".
 ```Shell
-bash run_visualization.sh generation_results_transfuser_both_paths
+bash run_visualization.sh generation_results_transfuser
 ```
 
 #### Getting results
 ```Shell
-generation_results_transfuser_both_paths/
+generation_results_transfuser/
 └── agents_4
     ├── RouteScenario_197_to_197
     │   ├── RouteScenario_197_iter_0.gif
