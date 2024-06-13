@@ -1,4 +1,4 @@
-# Scenario Simplification 
+# Automated Scenario Simplification 
 
 ## Requirements
 
@@ -58,128 +58,24 @@ rm -rf models.zip late_fusion geometric_fusion cilrs aim
 cd -
 ```
 
+### Initial checks before running the code
+Please make sure the "CARLA_ROOT" ("./carla_server" by default) and "KING_ROOT" (if present) environment variables are set correctly in all the bash scripts.
+
 ## How to run
-### Scenario Replay
-We provide a bash script for convenience. Please make sure the "CARLA_ROOT" ("./carla_server" by default) and "KING_ROOT" (if present) environment variables are set correctly in all of those scripts.
+The following script will generate a scenario with modifications, calculates the collision rate, and based on this rate, simplifies the scenario using a delta debugging algorithm and finds the true minimum set of scenario entities required to induce the same failure as original scenario. 
 
 #### Running the code
-For the generation script, first spin up a carla server in a separate shell:
-```Shell
-carla_server/CarlaUE4.sh
-```
-If you cannot separate the shell, execute the script in the background.
-```Shell
-nohup carla_server/CarlaUE4.sh 
-```
-Following script will run generation and automatically replay scenario with modifications and detect collisions. 
+The `generate_scenarios.py` script configures the environment using settings from `config.py`. The config.py configures the CARLA simulation environment based on the input configuration obtained from dd.py, the delta debugging algorithm. Initially, `dd.py` receives an initial test input that includes all specified IDs (entire sequence). The delta debugging algorithm within `dd.py` automatically launches the CARLA simulator, executes bash scripts based on the number of agents specified in the input sequence, and generates a scenario under the configured environment settings. It then computes the "collision_rate". If the collision rate is greater than 0, indicating successful recreation of the scenario, the delta debugging algorithm returns PASS. If the collision rate is 0, indicating a failure to recreate the scenario, it returns FAIL. Upon detecting an error, the algorithm tests the complement of the input. If the complement successfully passes, it reduces granularity and continues this process until it identifies the minimum set of entities that reproduce the failure. Conversely, if the complement fails, it increases granularity and repeats the process until achieving a PASS. This iterative refinement continues until the algorithm identifies the smallest set of inputs that reliably reproduce the original scenario's failure. Each minimized test input iteration is stored in `test_input.json`. This file configures subsequent runs of the CARLA simulation environment for further testing by the delta debugging algorithm, which verifies the collision_rate. The process persists until the minimum set of entities causing the original failure is identified. 
 
-##### TransFuser generation
-For Transfuser generation using both gradient paths, open run_generation_transfuser.sh, change number of agents to 2 or 4 based on your choice (default = 4 agents), remove --config and run:
-```Shell
-bash run_generation_transfuser_both_paths.sh
-```
+## Note
+The CARLA simulator and bash scripts are automated to streamline the testing process. Each test input triggers the CARLA simulator to launch, complete its simulation, and then relaunch for the next input. This automated approach is necessary due to several factors: modifying test inputs and configuring the CARLA simulation environment can sometimes slow down or cause interruptions, such as the simulator stopping, closing unexpectedly, or causing system instability that requires restarting the desktop. 
 
-#### Getting results
-```Shell
-generation_results_transfuser/
-├── agents_4
-    ├── RouteScenario_197_to_197
-    │   ├── results.json
-    │   └── scenario_records.json
-    ├── opt.pkl
-    └── opt.txt
-```
-### Collision detection
+Additionally, an important consideration is that the traffic light configurations change each time the world is loaded without closing CARLA. To maintain consistency and avoid issues with the changing of traffic light IDs, it's preferable to reload CARLA for each test input. Although one possible solution is to access traffic light IDs based on their location, but still remaining drawbacks prevail. Therefore, the decision was made to reload CARLA for every test input to ensure reliable and consistent simulation results.
 
-Collisions are detected in the scenario using Collision rate as shown below:
+### dd.py 
+Run dd.py, and for the selected scenario, the minized inoput is shown below. 
 
-![alt text](https://github.com/SanjeethaPennada/King-Replay/blob/main/Images/collision_detection.png)
-
-### Scenario Visualization
-#### Running the code
-First spin up a carla server in a separate shell:
-```Shell
-carla_server/CarlaUE4.sh 
-```
-Run the following script. The default directory is set to "generation_results_transfuser".
-```Shell
-bash run_visualization.sh generation_results_transfuser
-```
-
-#### Getting results
-```Shell
-generation_results_transfuser/
-└── agents_4
-    ├── RouteScenario_197_to_197
-    │   ├── RouteScenario_197_iter_0.gif
-    │   ├── results.json
-    │   └── scenario_records.json
-    ├── opt.pkl
-    └── opt.txt
-```
-
-#### Replaying scenario with modifications
-Open run_generation_transfuser.sh file, and use below arguments to replay scenario with modifications. 
-
-a) --building     - to remove all buildings in the Town. <br />
-b) --building_remove    - to remove specific buildings in the selected scenario. You can also particularly specify which building to be removed by making changes to the building_remove.py file.  <br />
-c) --trafficlight_remove  - to remove traffic lights in the selected scenario.  <br />
-d) --trafficlight_change  - to change the state of the traffic lights in the selected scenario.  <br />
-e) --weather_afn          - to change weather conditions to afternoon.  <br />
-f) --weather_mrng         - to change weather to morning.  <br /> 
-g) --weather_rain         - to change weather to raining condition.  <br />
-h) --CloudyDawn / --CloudyMorning/ --CloudyNight /--CloudyNoon / --CloudySunset / --Cloudytwilight - Set cloudy weather conditions.  <br />
-i) --HardRainDawn / --HardRainMorning/ --HardRainNight/ --HardRainNoon/ --HardRainSunset/ --HardRainTwilight - Set hard rain weather conditions.  <br />
-j) --MidRainDawn/ --MidRainMorning / --MidRainNight / --MidRainNoon /  --MidRainSunset  / --MidRainTwilight - Set medium rain conditions.  <br />
-k) --SoftRainDawn/ --SoftRainMorning / --SoftRainNight / --SoftRainNoon / --SoftRainSunset/ --SoftRainTwilight - Set soft rain weather conditions.  <br />
-l) --WetCloudyDawn/ --WetCloudyMorning / --WetCloudyNight/ --WetCloudyNoon/ --WetCloudySunset/ --WetCloudyTwilight  - Set wet cloudy weather conditions.  <br />
-m) --WetDawn/ --WetMorning / --WetNight / --WetNoon / --WetSunset / --WetTwilight  - Set wet weather conditions. <br />
-n) --dynamic_weather - Set dynamic weather conditions. 
-
-#### For example, to replay scenario with modifications: 
-
-Open run_generation_transfuser.sh file, and type below arguments to tailor the environment. Add arguments as indicated in generate_scenarios.py file.  For example if you would like to 
-
-i) change weather to CloudyNight: Use argument –cloudy_night in run_generation_transfuser.sh, spin up CARLA and open terminal to run:
-```Shell
-bash run_generation_transfuser.sh
-```
-![alt text](https://github.com/SanjeethaPennada/King-Replay/blob/main/Images/weather.png)
-
-The scenario is generated with cloudy_night settings. 
-
-ii) Toggle off all the buildings in a scenario using –building argument in run_generation_transfuser.sh, then run:
-```Shell
-bash run_generation_transfuser.sh
-```
-![alt text](https://github.com/SanjeethaPennada/King-Replay/blob/main/Images/toggling.png)
-
-iii) If you want to toggle specific building in the scenario use argument –building_remove run_generation_transfuser.sh, and select the building you want to remove by making corresponding changes to building_remove.py file. 
-
-![alt text](https://github.com/SanjeethaPennada/King-Replay/blob/main/Images/Building.png)
-
-#Define your location (replace these coordinates with your actual location) <br />
-location = carla.Location(x=-150.0, y=30.0, z=50.0)  # to remove top left building   <br />
-location = carla.Location(x=-150.0, y=70.0, z=50.0)  # to remove bottom left building  <br />
-location = carla.Location(x=-80.0, y=100.0, z=100.0)  # to remove top right building   <br />
-location = carla.Location(x=-80.0, y=180.0, z=120.0)  # to remove bottom right building  <br />
-
-#Define the radius within which to search for buildings <br />
-radius = 100.0  #to remove  top left building  <br />
-radius = 100.0  # to remove bottom left building  <br />
-radius = 150.0  # to remove top right building  <br />
-radius = 200.0  # to remove bottom right building  <br />
-
-#Collect the IDs of the first n buildings <br />
-first_n_building_ids = [building.id for building in building_objects[:60]] # to remove top left building   <br />
-first_n_building_ids = [building.id for building in building_objects[:100]]  #to remove bottom left building  <br />
-first_n_building_ids = [building.id for building in building_objects[:10]]  # to remove top right building   <br />
-first_n_building_ids = [building.id for building in building_objects[:45]] # to remove bottom right building  <br />
-
-Then run:
-```Shell
-bash run_generation_transfuser.sh
-```
+![alt text](https://github.com/SanjeethaPennada/King-Replay/blob/main/Images/output.png)
 
 
 
