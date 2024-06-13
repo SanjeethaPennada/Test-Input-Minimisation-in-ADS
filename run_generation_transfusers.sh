@@ -16,7 +16,7 @@ python generate_scenarios.py \
     --renderer_class CARLA --ego_agent transfuser \
     --ego_agent_ckpt driving_agents/king/transfuser/model_checkpoints/regular/transfuser/ \
     --init_root driving_agents/king/transfuser/king_initializations/initializations_subset \
-    --num_agents 2 --save_path ./generation_results_transfuser/agents_4 \
+    --num_agents 2 --save_path ./generation_results_transfuser/agents_2 \
     --opt_iters 1 --beta1 0.8 --beta2 0.99 --w_adv_col 3.0 --w_adv_rd 20.0 --config
 echo "Results"
 echo "==============="
