@@ -43,9 +43,9 @@ Download and setup CARLA 0.9.15.
 chmod +x setup_carla.sh
 ./setup_carla.sh
 ```
-![alt text](https://github.com/SanjeethaPennada/King-Replay/blob/main/Images/CARLA.png)
+![alt text](https://github.com/SanjeethaPennada/Scenario__Simplification/blob/main/Images/CARLA.png)
 
-Make sure to install all the required packages from [requirements.txt](https://github.com/SanjeethaPennada/King-Replay/blob/main/requirements.txt)
+Make sure to install all the required packages from [requirements.txt](https://github.com/SanjeethaPennada/Scenario__Simplification/blob/main/requirements.txt)
 
 ### Transfuser
 To generate scenarios for [TransFuser](https://github.com/autonomousvision/transfuser), you need to download the model weights:
@@ -72,7 +72,7 @@ Additionally, an important consideration is that the traffic light configuration
 #### Run dd.py 
 The `dd.py` script concurrently executes `generate_scenario.py`, `config.py`, and bash scripts specific to the chosen scenario. It then returns the minimized input shown below. 
 
-![alt text](https://github.com/SanjeethaPennada/King-Replay/blob/main/Images/output.png)
+![alt text](https://github.com/SanjeethaPennada/Scenario__Simplification/blob/main/Images/output.png)
 
 
 
