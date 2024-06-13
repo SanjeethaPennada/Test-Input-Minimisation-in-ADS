@@ -37,7 +37,7 @@ conda env create -f environment.yml
 conda activate king
 ```
 
-### Carla
+### CARLA
 Download and setup CARLA 0.9.15.
 ```Shell
 chmod +x setup_carla.sh
