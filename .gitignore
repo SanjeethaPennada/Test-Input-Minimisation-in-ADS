@@ -1,4 +1,5 @@
 __pycache__/
 generation_results_transfuser/
+carla_server/
 **/.DS_Store
 
