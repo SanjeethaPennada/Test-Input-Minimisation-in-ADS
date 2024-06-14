@@ -112,7 +112,7 @@ def get_collision_rate(inp):
         json.dump(inp, f)
         
     # Determine the npc_count based on the presence of the number 4 in the input list
-    npc_count = 4 if 4 in inp else 2 #number of NPCs 
+    npc_count = 4 if 'Four NPCs'in inp else 2 #number of NPCs 
     
      # Select the script name based on npc_count
     script_name = "run_generation_transfuser.sh" if npc_count == 4 else "run_generation_transfusers.sh"
@@ -154,7 +154,7 @@ def get_collision_rate(inp):
 
 if __name__ == "__main__":
    # Define the initial test input with a combination of various parameters
-    initial_test_input = building_ids + traffic_light_ids + streetlight_ids + weather_time_conditions + ['Bike', 'Pedestrian', 4]
+    initial_test_input = building_ids + traffic_light_ids + streetlight_ids + weather_time_conditions + ['Bike', 'Pedestrian', 'Four NPCs']
     
     # Print the initial test input
     print(f"Initial Test Input: {initial_test_input}")
