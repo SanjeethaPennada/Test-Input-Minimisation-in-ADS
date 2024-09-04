@@ -74,7 +74,7 @@ The `dd.py` script concurrently executes `generate_scenario.py`, `config.py`, an
 
 ![alt text](https://github.com/SanjeethaPennada/Scenario__Simplification/blob/main/Images/output.png)
 
-If slight chnages are made in the order of weather_time conditions, then the output of DD algorithm also varied. 
+If slight changes are made in the order of weather_time conditions, then the output of DD algorithm also varied. 
 
 ![alt text](https://github.com/SanjeethaPennada/Scenario__Simplification/blob/main/Images/output%202.png)
 
