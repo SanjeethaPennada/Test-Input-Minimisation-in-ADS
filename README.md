@@ -78,6 +78,9 @@ If slight changes are made in the order of weather_time conditions, then the out
 
 ![alt text](https://github.com/SanjeethaPennada/Scenario__Simplification/blob/main/Images/output%202.png)
 
+### Modified DD to identify all the possible minimum set of subsets that induce same failure as original scenario 
 
+![alt text](https://github.com/SanjeethaPennada/Scenario__Simplification/blob/main/Images/output%203.png)
 
+![alt text](https://github.com/SanjeethaPennada/Scenario__Simplification/blob/main/Images/output%204.png)
 
