@@ -5,7 +5,7 @@ def CDD(L, ψ, p0=0.02):
     Inputs:
     - L: List of elements to minimize.
     - ψ: Property function, returns False for failure-inducing inputs.
-    - p0: Initial probability (default is 0.05).
+    - p0: Initial probability (default is less than 0.05).
     
     Output:
     - Reduced list L that still satisfies the failure-inducing property ψ.
