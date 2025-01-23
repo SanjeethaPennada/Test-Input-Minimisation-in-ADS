@@ -1,5 +1,5 @@
 import math
-def CDD(L, ψ, p0=0.01):
+def CDD(L, ψ, p0=0.02):
     """
     Counter-Based Delta Debugging (CDD) algorithm.
     Inputs:
