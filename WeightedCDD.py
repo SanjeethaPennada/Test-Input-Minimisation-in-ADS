@@ -1,18 +1,31 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Jan 23 15:42:54 2025
+
+@author: sanjeetha
+"""
+
+
 import math
-def CDD(L, Ïˆ, p0=0.02):
+
+def CombinedDD(L, Ïˆ, p0=0.02, weights=None):
     """
-    Counter-Based Delta Debugging (CDD) algorithm.
+    Combined Delta Debugging (CDD + WProbDD).
     Inputs:
     - L: List of elements to minimize.
     - Ïˆ: Property function, returns False for failure-inducing inputs.
     - p0: Initial probability (default is less than 0.05).
+    - weights: List of weights corresponding to elements in L (optional).
     
     Output:
     - Reduced list L that still satisfies the failure-inducing property Ïˆ.
     """
+    weights = weights or {item: 1 for item in L}  # Default weight is 1 if not provided
     r = 0  # Round number
+    
     while True:
-        # Compute subset size for the current round
+        # Compute probability for the current round
         pr = compute_probability(r, p0)
         s = compute_subset_size(pr, len(L))
         print(f"\nRound {r}: Subset size = {s}, Current L = {L}")
@@ -24,6 +37,7 @@ def CDD(L, Ïˆ, p0=0.02):
         subsets = partition(L, s)
         removed_any = False
         
+        # Weighted partitioning based on probabilities and weights
         for subset in subsets:
             temp = [item for item in L if item not in subset]
             
@@ -31,7 +45,10 @@ def CDD(L, Ïˆ, p0=0.02):
             if not temp:
                 continue
             
+            # Calculate the weighted score of the subset
+            subset_weight = sum(weights[item] for item in subset)
             print(f"Testing subset: {subset}, Temp = {temp}, Ïˆ(temp) = {Ïˆ(temp)}")
+            
             if Ïˆ(temp):  # If the property still holds, update L
                 print(f"Subset {subset} is removable. Updating L to {temp}.")
                 L = temp
@@ -58,17 +75,19 @@ def CDD(L, Ïˆ, p0=0.02):
     return L
 
 
-def compute_probability(r, p0):
+def compute_probability(r, p0, max_pr=0.99):
     """
     Compute the probability for the current round.
     Inputs:
     - r: Current round number.
     - p0: Initial probability.
+    - max_pr: Maximum allowed probability to prevent math domain error.
     
     Output:
     - Probability for the current round.
     """
-    return p0 * (1.582 ** r) #default value = 1.582
+    pr = p0 * (1.582 ** r)
+    return min(pr, max_pr)  # Ensure probability doesn't exceed max_pr
 
 
 def compute_subset_size(pr, L_len):
@@ -102,12 +121,13 @@ def Ïˆ(L):
     """
     Property function: Ïˆ returns True if both 2 and 3 are in the list, indicating a failure-inducing condition.
     """
-    return 3 in L and 4 in L 
+    return 3 in L and 4 in L or 5 in L and 4 in L
 
 
 # Input List
 L = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+weights = {item: item for item in L}  # Example weights proportional to the element values
 
-# Run CDD
-reduced_list = CDD(L, Ïˆ)
+# Run CombinedDD
+reduced_list = CombinedDD(L, Ïˆ, p0=0.2, weights=weights)
 print("Reduced List:", reduced_list)
