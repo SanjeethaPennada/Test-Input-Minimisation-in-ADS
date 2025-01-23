@@ -68,7 +68,7 @@ def compute_probability(r, p0):
     Output:
     - Probability for the current round.
     """
-    pr = p0 * (1.582 ** r)
+    pr = p0 * (2 ** r) #default value = 1.582
     return min(pr, 0.999)  # Cap the probability to avoid exceeding 1
 
 
@@ -105,7 +105,7 @@ def ψ(L):
     """
     Property function: ψ returns True if both 2 and 3 are in the list, indicating a failure-inducing condition.
     """
-    return 'night' in L and 'Four NPCs' in L or 'rain' in L and 'Four NPCs' in L
+    return 'rain' in L and 'Four NPCs' in L or 'night' in L and 'Four NPCs' in L
 
 
 # Input List

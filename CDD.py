@@ -68,7 +68,7 @@ def compute_probability(r, p0):
     Output:
     - Probability for the current round.
     """
-    return p0 * (1.582 ** r)
+    return p0 * (1.9 ** r) #default value = 1.582
 
 
 def compute_subset_size(pr, L_len):
