@@ -68,7 +68,7 @@ def compute_probability(r, p0):
     Output:
     - Probability for the current round.
     """
-    pr = p0 * (2 ** r) #default value = 1.582
+    pr = p0 * (1.582 ** r) #default value = 1.582
     return min(pr, 0.999)  # Cap the probability to avoid exceeding 1
 
 
