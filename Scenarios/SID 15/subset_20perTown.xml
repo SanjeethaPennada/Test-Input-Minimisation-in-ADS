@@ -1,0 +1,6 @@
+<routes>
+  <route id="714" town="Town05">
+    <waypoint x="24.571026" y="102.714920" z="0.000015" pitch="0.0" roll="0.0" yaw="-269.977081"/>
+    <waypoint x="21.892956" y="185.368835" z="0.000008" pitch="0.0" roll="0.0" yaw="141.048004"/>
+  </route>
+</routes>
