@@ -1,5 +1,5 @@
 # Automated Scenario Simplification 
-
+\SP{Don't review this until Monday afternoon, Donghwan}
 ## Requirements
 
 ### Hardware
