@@ -5,7 +5,7 @@ This repository contains the code to automatically compare state-of-the-art test
 ## Contents
 1. [Prerequisites](#Prerequisites)
 2. [Setup](#setup)
-3. [Comparison of DD, ProbDD, and CDD for ADS Scenario Simplification](#Comparison-of-DD,-ProbDD,-and-CDD-for-ADS-Scenario-Simplification)
+3. [DD Vs ProbDD Vs CDD for ADS Scenario Simplification](#DD-Vs-ProbDD-Vs-CDD-for-ADS-Scenario-Simplification)
    
 ## Prerequisites
 
