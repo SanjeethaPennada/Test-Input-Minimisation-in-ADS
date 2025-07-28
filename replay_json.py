@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#This is used to replay NPCs i.e., NPCs travel pre defined route and this code is used to replay their path. 
 
 import glob
 import os
