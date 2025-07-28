@@ -1,3 +1,5 @@
+#This is mainly used to get the weather conditions during initial failure scenario, and these values are added in config_dd.py file. 
+
 import carla
 
 # Connect to the CARLA server
