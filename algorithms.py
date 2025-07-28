@@ -1,3 +1,5 @@
+#Automated code to compare various test-input minimisation algorithms for scenario simplification in ADS 
+
 import itertools
 import json
 import logging
@@ -9,16 +11,15 @@ import time
 from enum import Enum
 from typing import Callable, Sequence, Any, Tuple, List, Optional
 
-
-# Outcome enum compatible with both AbstractCDD and AbstractDD
+# Outcome
 class Outcome(Enum):
-    PASS = 'PASS'  # Collision (property not satisfied)
-    FAIL = 'FAIL'  # No Collision (property satisfied)
+    PASS = 'PASS'  # Collision 
+    FAIL = 'FAIL'  # No Collision 
 
     def __repr__(self):
         return '<%s.%s>' % (self.__class__.__name__, self.name)
 
-# ZellerSplit class from config_splitters.py
+# ZellerSplit for DD
 class ZellerSplit(object):
   
     def __init__(self, n=2):
@@ -44,7 +45,7 @@ class ZellerSplit(object):
         return '%s.%s(n=%s)' % (cls.__module__, cls.__name__, self._n)
 
 
-# OutcomeCache and ConfigCache classes from outcome_cache.py
+
 class OutcomeCache(object):
 
     def set_test_builder(self, test_builder):
@@ -115,7 +116,7 @@ class ConfigCache(OutcomeCache):
         return ''.join(s)
 
 
-# Logging utility from AbstractCDD
+# Logging utility
 class utils:
     @staticmethod
     def generate_log(indices, prefix, print_idx=True, threshold=30):
@@ -124,7 +125,7 @@ class utils:
         return f"\t{prefix}: {[f'idx={i}' if print_idx else i for i in indices]}"
 
 
-# AbstractCDD class from abstract_cdd.py
+# AbstractCDD class
 class AbstractCDD:
     
     def __init__(self, test, split, id_prefix=(), other_config=None):
@@ -197,7 +198,7 @@ class AbstractCDD:
             for idx in config_idx_to_delete:
                 config_to_keep[idx] = False
             outcome = self._test_config(config_to_keep, config_log_id)
-            # FAIL means current variant cannot satisfy the property
+          
 
             if outcome is Outcome.FAIL:
                 self.update_when_pass(config_idx_to_delete)
@@ -404,7 +405,7 @@ class CarlaCDD(AbstractCDD):
 
 
 
-# AbstractDD class from the provided code
+
 class AbstractDD(object):
     """
     Abstract super-class of the parallel and non-parallel DD classes.
@@ -471,7 +472,7 @@ class AbstractDD(object):
                 subsets = next_subsets
                 logger.info('\tIncreased granularity')
             else:
-             # Minimization ends if no interesting configuration was found by the finest splitting.
+             # Minimisation ends if no interesting configuration was found by the finest splitting.
                 logger.info("\tFinal result: %d/%d", len(flatten(subsets)), self.original_config_size)
                 logger.info("Execution time at this level: %.6f s", time.time() - time_start)
                 return self.idx2config(current_config_idx)
@@ -533,7 +534,7 @@ class AbstractDD(object):
         return config
 
 
-# CarlaDD subclass for DD
+
 class CarlaDD(AbstractDD):
     def _processElementToPreserve(self, toBePreserve):
         return toBePreserve
@@ -551,7 +552,7 @@ def flatten(l):
     return [item for sublist in l for item in sublist]
 
 
-# CARLA simulation inputs
+# CARLA simulation inputs for SID 3
 
 building_ids = [
         12323576063094642555,
@@ -792,12 +793,11 @@ logger.setLevel(logging.INFO)
 
 def run_dd(dd_type):
     initial_test_input =   npc_ids +  weather_time_conditions + building_ids + streetlight_ids
-
-
-
-
-
-
+    #other test inputs: 
+    #weather_time_conditions + npc_ids + streetlight_ids + building_ids,
+    #building_ids + npc_ids + streetlight_ids + weather_time_conditions,
+    #streetlight_ids + weather_time_conditions + npc_ids + building_ids, and
+    #building_ids + streetlight_ids + weather_time_conditions + npc_ids.
 
     logger.info("Initial Test Input: %s", initial_test_input)
     logger.info(f"Running {dd_type.upper()}...")
