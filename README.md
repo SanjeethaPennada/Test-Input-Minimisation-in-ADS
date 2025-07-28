@@ -6,7 +6,7 @@ This repository contains the code to automatically compare state-of-the-art test
 1. [Prerequisites](#Prerequisites)
 2. [Setup](#setup)
 3. [Scenario Generation](#Scenario-Generation)
-4. [DD Vs ProbDD Vs CDD](#DDvsProbDDvsCDD)
+4. [DD Vs ProbDD Vs CDD](#DD-Vs-ProbDD-Vs-CDD)
 
 ## Prerequisites
 
