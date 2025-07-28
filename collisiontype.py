@@ -1,3 +1,5 @@
+#This is used for strong oracle where type of collision is crucial. 
+
 import glob
 import os
 import sys
