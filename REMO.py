@@ -1,3 +1,5 @@
+#This code replays a scenario in CARLA with modifications based on config_dd.py
+
 import os
 import argparse
 import torch
