@@ -1,3 +1,5 @@
+#This code is used for weak oracle, when collision is the only criteria to preserve the property and type of collision does not matter. 
+
 import glob
 import os
 import sys
