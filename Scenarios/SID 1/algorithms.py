@@ -18,7 +18,7 @@ class Outcome(Enum):
     def __repr__(self):
         return '<%s.%s>' % (self.__class__.__name__, self.name)
 
-# ZellerSplit class from config_splitters.py
+# ZellerSplit class 
 class ZellerSplit(object):
   
     def __init__(self, n=2):
@@ -44,7 +44,7 @@ class ZellerSplit(object):
         return '%s.%s(n=%s)' % (cls.__module__, cls.__name__, self._n)
 
 
-# OutcomeCache and ConfigCache classes from outcome_cache.py
+# OutcomeCache and ConfigCache classes 
 class OutcomeCache(object):
 
     def set_test_builder(self, test_builder):
@@ -115,7 +115,7 @@ class ConfigCache(OutcomeCache):
         return ''.join(s)
 
 
-# Logging utility from AbstractCDD
+# Logging utility 
 class utils:
     @staticmethod
     def generate_log(indices, prefix, print_idx=True, threshold=30):
@@ -124,7 +124,7 @@ class utils:
         return f"\t{prefix}: {[f'idx={i}' if print_idx else i for i in indices]}"
 
 
-# AbstractCDD class from abstract_cdd.py
+# AbstractCDD class 
 class AbstractCDD:
     
     def __init__(self, test, split, id_prefix=(), other_config=None):
@@ -404,7 +404,7 @@ class CarlaCDD(AbstractCDD):
 
 
 
-# AbstractDD class from the provided code
+# AbstractDD class 
 class AbstractDD(object):
     """
     Abstract super-class of the parallel and non-parallel DD classes.
