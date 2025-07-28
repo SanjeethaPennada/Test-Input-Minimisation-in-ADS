@@ -1,4 +1,5 @@
-# ADS Scenario Simplification: DD vs ProbDD vs CDD
+# An Empirical Comparison of Input Minimisation Algorithms for ADS Scenario Simplification (DD Vs ProbDD Vs CDD)
+
 This repository contains the code to automatically compare state-of-the-art test-input minimisation algorithms such as Delta Debugging (DD), Probabilistic DD (ProbDD) and Counter DD (CDD) for Scenario simplification in Autonomous Driving Systems (ADS). If you find this repository useful, please cite. 
 
 
