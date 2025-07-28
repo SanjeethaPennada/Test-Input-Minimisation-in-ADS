@@ -50,8 +50,6 @@ Download and setup CARLA 0.9.15.
 chmod +x setup_carla.sh
 ./setup_carla.sh
 ```
-![alt text](https://github.com/SanjeethaPennada/Test-Input-Minimisation-in-ADS/blob/main/Images/CARLA.png)
-
 Make sure to install all the required packages from [requirements.txt](https://github.com/SanjeethaPennada/Test-Input-Minimisation-in-ADS/blob/main/requirements.txt)
 
 ### Transfuser
