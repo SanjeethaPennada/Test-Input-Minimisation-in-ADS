@@ -68,7 +68,7 @@ cd -
 ### Initial checks before running the code
 Please make sure the "CARLA_ROOT" ("./carla_server" by default) and "Test-Input-Minimisation-in-ADS_ROOT" (if present), the environment variables are set correctly in all the bash scripts. The following script will compare different test-input minimisation algorithms for scenario simplification in ADS. 
 
-## Comparison of DD, ProbDD, and CDD for ADS Scenario Simplification
+## DD Vs ProbDD Vs CDD for ADS Scenario Simplification
 #### Example: Scenario ID 3
 1. Go to carla_server folder, where CarlaUE4.sh is present and run:
    ```Shell
