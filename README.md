@@ -2,13 +2,11 @@
 
 This repository contains the code to automatically compare state-of-the-art test-input minimisation algorithms such as Delta Debugging (DD), Probabilistic DD (ProbDD) and Counter DD (CDD) for Scenario simplification in Autonomous Driving Systems (ADS). If you find this repository useful, please cite. 
 
-
 ## Contents
 1. [Prerequisites](#Prerequisites)
 2. [Setup](#setup)
-3. [Scenario Generation](#Scenario-Generation)
-4. [DD Vs ProbDD Vs CDD](#DD-Vs-ProbDD-Vs-CDD)
-
+3. [Comparison of DD, ProbDD, and CDD for ADS Scenario Simplification](#Comparison-of-DD,-ProbDD,-and-CDD-for-ADS-Scenario-Simplification)
+   
 ## Prerequisites
 
 ### Hardware
@@ -70,7 +68,7 @@ cd -
 ### Initial checks before running the code
 Please make sure the "CARLA_ROOT" ("./carla_server" by default) and "Test-Input-Minimisation-in-ADS_ROOT" (if present), the environment variables are set correctly in all the bash scripts. The following script will compare different test-input minimisation algorithms for scenario simplification in ADS. 
 
-## Scenario Generation 
+## Comparison of DD, ProbDD, and CDD for ADS Scenario Simplification
 #### Example: Scenario ID 3
 1. Go to carla_server folder, where CarlaUE4.sh is present and run:
    ```Shell
@@ -96,7 +94,10 @@ This initialises a failure scenario at a T-junction involving a head-on collisio
       - python3 collisiontype.py to python3 collision.py and
       - "Head-on" in output to "Accident" in output
 
-## DD Vs ProbDD Vs CDD
+4. Therefore, since we are trying to simplify Scenario ID 3, we need to get all these python files into the root folder.
+
+5. 
+      
 #### Note
 The CARLA simulator and bash scripts are automated to streamline the testing process. Each test input triggers the CARLA simulator to launch, complete its simulation, and then relaunch for the next input. This automated approach is necessary due to several factors: modifying test inputs and configuring the CARLA simulation environment can sometimes slow down or cause interruptions, such as the simulator stopping, closing unexpectedly, or causing system instability that requires restarting the desktop. 
 
