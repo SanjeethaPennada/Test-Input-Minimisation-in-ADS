@@ -31,11 +31,6 @@ from proxy_simulator.driving_costs import RouteDeviationCostRasterized, BatchedP
 PIXELS_PER_METER = 5
 PIXELS_AHEAD_VEHICLE = 110
 
-def RainNight_script():
-    subprocess.Popen(["python3", "weather_rain.py"])
-
-
-
 class GenerationEngine:
     """Engine that controls the differentiable simulator.
 
