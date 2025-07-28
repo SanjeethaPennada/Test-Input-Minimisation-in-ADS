@@ -84,7 +84,7 @@ This initialises a failure scenario at a T-junction involving a head-on collisio
 3. In Scenarios folder, we have different python files corresponding to each and every scenario.
 
    a. subset_20perTown.xml -- this generates the road where the scenario needs to be executed, so based on the Scenario ID i.e., SID  this needs to be changed in 
-      ([https://github.com/SanjeethaPennada/Test-Input-Minimisation-in-ADS/tree/main/leaderboard/data/routes]). 
+      https://github.com/SanjeethaPennada/Test-Input-Minimisation-in-ADS/tree/main/leaderboard/data/routes. 
 
    b. NPC.zip -- extract this folder into NPC.json and this contains the pre-defined path that NPCs has to follow.
 
