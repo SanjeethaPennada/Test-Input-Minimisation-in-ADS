@@ -15,7 +15,7 @@
 ## Setup
 Clone the repo
 ```Shell
-git clone https://github.com/SanjeethaPennada/King-Replay.git
+git clone https://github.com/SanjeethaPennada/Test-Input-Minimisation-in-ADS.git
 cd king
 ```
 
