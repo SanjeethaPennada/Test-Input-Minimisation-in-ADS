@@ -94,10 +94,18 @@ This initialises a failure scenario at a T-junction involving a head-on collisio
       - python3 collisiontype.py to python3 collision.py and
       - "Head-on" in output to "Accident" in output
 
-4. Therefore, since we are trying to simplify Scenario ID 3, we need to get all these python files into the root folder.
+4. Therefore, since we are trying to simplify Scenario ID 3, we need to get all these python files into the root folder and run: 
+```Shell
+python3 algorithms.py
+```
+This runs scenario simpliication in ADS using DD, ProbDD and CDD for initial test input: npc_ids +  weather_time_conditions + building_ids + streetlight_ids. Repeat this for different test input combinations for both oracles: 
+- weather_time_conditions + npc_ids + streetlight_ids + building_ids,
+- building_ids + npc_ids + streetlight_ids + weather_time_conditions,
+- streetlight_ids  + weather_time_conditions + npc_ids +  building_ids, and
+- building_ids + streetlight_ids  + weather_time_conditions + npc_ids.
 
-5. 
-      
+Compute all the three different metrics: efficiency (Avg number of steps i.e., number of simulations), effectiveness (size of the minimised input) and diversity (Number of unique solutions) 
+
 #### Note
 The CARLA simulator and bash scripts are automated to streamline the testing process. Each test input triggers the CARLA simulator to launch, complete its simulation, and then relaunch for the next input. This automated approach is necessary due to several factors: modifying test inputs and configuring the CARLA simulation environment can sometimes slow down or cause interruptions, such as the simulator stopping, closing unexpectedly, or causing system instability that requires restarting the desktop. 
 
