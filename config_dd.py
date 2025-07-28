@@ -2,9 +2,9 @@ import carla
 import json
 import os
 
-# Define various lists of entities that can be manipulated in the simulation
 
-# Define entities that can be manipulated in the simulation
+# Define entities that can be manipulated in the simulation 
+#These values are obtained from ids.py which generates output.json file that contains the ids information. 
 building_ids =[
         12323576063094642555,
         8965582157476607102,
@@ -119,7 +119,9 @@ def set_weather_time_conditions(world, weather_conditions):
     """Sets weather and time conditions in CARLA based on the input conditions."""
     weather = carla.WeatherParameters()
 
-    # Time conditions
+    # Time conditions 
+    #These values are obtained from weather.py 
+        
     if 'morning' in weather_conditions:
         weather.sun_azimuth_angle = 180.0
         weather.sun_altitude_angle = 30.0
