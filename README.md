@@ -24,7 +24,7 @@ This repository contains the code to automatically compare state-of-the-art test
 Clone the repo
 ```Shell
 git clone https://github.com/SanjeethaPennada/Test-Input-Minimisation-in-ADS.git
-cd king
+cd Test-Input-Minimisation-in-ADS
 ```
 
 ### Environment
@@ -70,8 +70,21 @@ cd -
 Please make sure the "CARLA_ROOT" ("./carla_server" by default) and "Test-Input-Minimisation-in-ADS_ROOT" (if present), the environment variables are set correctly in all the bash scripts. The following script will compare different test-input minimisation algorithms for scenario simplification in ADS. 
 
 ## Scenario Generation 
+#### Example: Scenario ID 3
+1. Go to carla_server folder, where CarlaUE4.sh is present and run:
+   ```Shell
+   conda activate king
+   ./CarlaUE4.sh 
+   ```
+2. Go to the root folder, and run:
+```Shell
+bash run_generation_transfuser.sh
+```
+This initialises a failure scenario at a T-junction involving a head-on collision.
 
-
+3. In Scenarios folder, we have different python files related to each and every scenario.
+   a. subset_20perTown.xml -- this generates the road where the scenario needs to be executed, so based on the Scenario ID i.e., SID  this needs to be changed in 
+([https://github.com/SanjeethaPennada/Test-Input-Minimisation-in-ADS/tree/main/leaderboard/data/routes])
 
 ## DD Vs ProbDD Vs CDD
 #### Note
