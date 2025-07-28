@@ -1,6 +1,14 @@
 # ADS Scenario Simplification: DD vs ProbDD vs CDD
+This repository contains the code to automatically compare state-of-the-art test-input minimisation algorithms such as Delta Debugging (DD), Probabilistic DD (ProbDD) and Counter DD (CDD) for Scenario simplification in Autonomous Driving Systems (ADS). If you find this repository useful, please cite. 
 
-## Requirements
+
+## Contents
+1. [Prerequisites](#Prerequisites)
+2. [Setup](#setup)
+3. [Scenario Generation](#Scenario-Generation)
+4. [DD Vs ProbDD Vs CDD](#DDvsProbDDvsCDD)
+
+## Prerequisites
 
 ### Hardware
 - GPU: NVIDIA Corporation
@@ -61,9 +69,11 @@ cd -
 ### Initial checks before running the code
 Please make sure the "CARLA_ROOT" ("./carla_server" by default) and "Test-Input-Minimisation-in-ADS_ROOT" (if present), the environment variables are set correctly in all the bash scripts. The following script will compare different test-input minimisation algorithms for scenario simplification in ADS. 
 
-## How to run
+## Scenario Generation (Example: Scenario ID 3) 
 
 
+
+## DD Vs ProbDD Vs CDD
 #### Note
 The CARLA simulator and bash scripts are automated to streamline the testing process. Each test input triggers the CARLA simulator to launch, complete its simulation, and then relaunch for the next input. This automated approach is necessary due to several factors: modifying test inputs and configuring the CARLA simulation environment can sometimes slow down or cause interruptions, such as the simulator stopping, closing unexpectedly, or causing system instability that requires restarting the desktop. 
 
