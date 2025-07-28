@@ -83,11 +83,15 @@ bash run_generation_transfuser.sh
 This initialises a failure scenario at a T-junction involving a head-on collision.
 
 3. In Scenarios folder, we have different python files corresponding to each and every scenario.
+
    a. subset_20perTown.xml -- this generates the road where the scenario needs to be executed, so based on the Scenario ID i.e., SID  this needs to be changed in 
       ([https://github.com/SanjeethaPennada/Test-Input-Minimisation-in-ADS/tree/main/leaderboard/data/routes]). 
+
    b. NPC.zip -- extract this folder into NPC.json and this contains the pre-defined path that NPCs has to follow.
+
    c. config_dd.py -- this contains the set of building ids, street light ids, weather conditions, time conditions that needs to configured during scenario              simplification.
-   d. algorithms.py -- this automatically runs scenario simplification using all the three test-input minimisation algorithms using strong oracle. For weak              oracle, two lines within get_collision_rate(inp) function needs to be changed as below
+
+    d. algorithms.py -- this automatically runs scenario simplification using all the three test-input minimisation algorithms using strong oracle. For weak              oracle, two lines within get_collision_rate(inp) function needs to be changed as below
       - python3 collisiontype.py to python3 collision.py and
       - "Head-on" in output to "Accident" in output
 
