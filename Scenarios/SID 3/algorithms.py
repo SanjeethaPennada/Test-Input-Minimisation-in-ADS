@@ -10,7 +10,7 @@ from enum import Enum
 from typing import Callable, Sequence, Any, Tuple, List, Optional
 
 
-# Outcome enum compatible with both AbstractCDD and AbstractDD
+
 class Outcome(Enum):
     PASS = 'PASS'  # Collision (property not satisfied)
     FAIL = 'FAIL'  # No Collision (property satisfied)
@@ -18,7 +18,6 @@ class Outcome(Enum):
     def __repr__(self):
         return '<%s.%s>' % (self.__class__.__name__, self.name)
 
-# ZellerSplit class from config_splitters.py
 class ZellerSplit(object):
   
     def __init__(self, n=2):
@@ -44,7 +43,7 @@ class ZellerSplit(object):
         return '%s.%s(n=%s)' % (cls.__module__, cls.__name__, self._n)
 
 
-# OutcomeCache and ConfigCache classes from outcome_cache.py
+
 class OutcomeCache(object):
 
     def set_test_builder(self, test_builder):
@@ -115,7 +114,7 @@ class ConfigCache(OutcomeCache):
         return ''.join(s)
 
 
-# Logging utility from AbstractCDD
+
 class utils:
     @staticmethod
     def generate_log(indices, prefix, print_idx=True, threshold=30):
@@ -124,7 +123,6 @@ class utils:
         return f"\t{prefix}: {[f'idx={i}' if print_idx else i for i in indices]}"
 
 
-# AbstractCDD class from abstract_cdd.py
 class AbstractCDD:
     
     def __init__(self, test, split, id_prefix=(), other_config=None):
@@ -394,7 +392,7 @@ class AbstractCDD:
         return ' / '.join(str(i) for i in config_id)
         
         
-# CarlaCDD subclass for CDD and ProbDD
+
 class CarlaCDD(AbstractCDD):
     def _processElementToPreserve(self, toBePreserve):
         return toBePreserve
@@ -404,7 +402,7 @@ class CarlaCDD(AbstractCDD):
 
 
 
-# AbstractDD class from the provided code
+
 class AbstractDD(object):
     """
     Abstract super-class of the parallel and non-parallel DD classes.
@@ -533,7 +531,6 @@ class AbstractDD(object):
         return config
 
 
-# CarlaDD subclass for DD
 class CarlaDD(AbstractDD):
     def _processElementToPreserve(self, toBePreserve):
         return toBePreserve
@@ -542,7 +539,7 @@ class CarlaDD(AbstractDD):
         return config, outcome
 
 
-# Utility functions from AbstractDD
+
 def split_list(input_list, chunk_size):
     return [input_list[i:i + chunk_size] for i in range(0, len(input_list), chunk_size)]
 
