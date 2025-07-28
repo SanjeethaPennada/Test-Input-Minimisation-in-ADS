@@ -11,17 +11,18 @@ from tqdm.auto import trange
 import random
 import carla
 from pathlib import Path
-import subprocess 
 from PIL import ImageShow
 import numpy as np
 import torch.nn.functional as F
 import threading
+import argparse
+import numpy as np
+import torch
 from driving_agents.king.expert.expert_agent import AutoPilot
 from driving_agents.king.transfuser.transfuser_agent import TransFuserAgent
 from driving_agents.king.aim_bev.aim_bev_agent import AimBEVAgent
 from leaderboard.utils.route_indexer import RouteIndexer
 from srunner.tools.route_manipulation import interpolate_trajectory
-
 from proxy_simulator.simulator import ProxySimulator
 from proxy_simulator.motion_model import BicycleModel
 from proxy_simulator.utils import save_args
@@ -33,29 +34,9 @@ from proxy_simulator.driving_costs_remo import RouteDeviationCostRasterized, Bat
 PIXELS_PER_METER = 5
 PIXELS_AHEAD_VEHICLE = 110
 
-import argparse
-import numpy as np
-import random
-import torch
-from pathlib import Path
-
-
-
-import argparse
-import numpy as np
-import random
-import torch
-from pathlib import Path
-
-import torch
-import numpy as np
-import random
-import argparse
-from pathlib import Path
-
 from driving_agents.king.transfuser.transfuser_agent import TransFuserAgent
 
-
+#configurable file that allows replay of a scenario with modifications
 def config_script():
     subprocess.Popen(["python3", "config_dd.py"])
 
