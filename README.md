@@ -111,8 +111,6 @@ The CARLA simulator and bash scripts are automated to streamline the testing pro
 
 Additionally, an important consideration is that the traffic light configurations change each time the world is loaded without closing CARLA. To maintain consistency and avoid issues with the changing of traffic light IDs, it's preferable to reload CARLA for each test input. Although one possible solution is to access traffic light IDs based on their location, but still remaining drawbacks prevail. Therefore, the decision was made to reload CARLA for every test input to ensure reliable and consistent simulation results.
 
-The description of each and every code is given within the .py file itself. 
-
 ## Acknowledgements
 This implementation is based on code from several repositories. We sincerely thank the authors for their awesome work.
 - [CARLA Leaderboard](https://github.com/carla-simulator/leaderboard)
