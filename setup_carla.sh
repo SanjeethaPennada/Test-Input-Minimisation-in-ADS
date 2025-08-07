@@ -3,8 +3,8 @@
 # Download and install CARLA
 mkdir carla_server
 cd carla_server
-wget https://carla-releases.s3.eu-west-3.amazonaws.com/Linux/CARLA_0.9.15.tar.gz
-wget https://carla-releases.s3.eu-west-3.amazonaws.com/Linux/AdditionalMaps_0.9.15.tar.gz
+wget https://carla-releases.b-cdn.net/Linux/CARLA_0.9.15.tar.gz
+wget https://carla-releases.b-cdn.net/Linux/AdditionalMaps_0.9.15.tar.gz
 tar -xf CARLA_0.9.15.tar.gz
 tar -xf AdditionalMaps_0.9.15.tar.gz
 rm CARLA_0.9.15.tar.gz
