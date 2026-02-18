@@ -158,7 +158,7 @@ class AbstractCDD:
 
         self.current_best_config_idx = [True for _ in range(len(config))]
 
-        assert self._test_config(self.current_best_config_idx, ('assert',)) is Outcome.PASS
+        assert self._test_config(self.current_best_config_idx, ('assert',)) is Outcome.FAIL
 
         logger.info('Run #%d', 0)
         logger.info('\tConfig size: %d', self.get_current_config_size())
@@ -425,7 +425,7 @@ class AbstractDD(object):
         self.original_config_idx = list(range(self.original_config_size))
         current_config_idx = self.original_config_idx[:]
 
-        assert self._test_config(current_config_idx, ('assert',)) is Outcome.PASS
+        assert self._test_config(current_config_idx, ('assert',)) is Outcome.FAIL
 
         if self.start_from_n:
             subsets = split_list(self.original_config_idx, self.start_from_n)
@@ -633,7 +633,7 @@ def get_collision_rate(inp):
         os.system(f"gnome-terminal -- bash -c '{replay_command}; exec bash' & echo $! > {replay_pid_file}")
         logger.info("Started replay_json.py. Waiting 3 seconds...")
         time.sleep(3)
-        collision_command = f"source ~/anaconda3/etc/profile.d/conda.sh && conda activate king && python3 collisiontype.py > {output_file} 2>&1" #collision.py for weak oracle
+        collision_command = f"source ~/anaconda3/etc/profile.d/conda.sh && conda activate king && python3 collision.py > {output_file} 2>&1" #collision.py for weak oracle
         os.system(f"gnome-terminal -- bash -c '{collision_command}' & echo $! > {collision_pid_file}")
         logger.info("Started collision.py. Waiting 25 seconds...")
         time.sleep(25)
@@ -645,7 +645,7 @@ def get_collision_rate(inp):
         else:
             raise ValueError("collision_output.txt not created")
 
-        if "Head-on" in output:  #Accident for weak oracle
+        if "Accident" in output:  #Accident for weak oracle
             return 1
         elif "Safe" in output:
             return 0
@@ -786,19 +786,21 @@ def run_dd(dd_type):
 
 
 if __name__ == "__main__":
-        
-    logger.info("=== CDD Run ===")
-    cdd_result = run_dd("cdd")
-   
-    logger.info("\n=== ProbDD Run ===")
-    probdd_result = run_dd("probdd")
 
     logger.info("\n=== DD Run ===")
     dd_result = run_dd("dd")
+    
+    logger.info("\n=== ProbDD Run ===")
+    probdd_result = run_dd("probdd")
+   
+    logger.info("=== CDD Run ===")
+    cdd_result = run_dd("cdd")
+   
+
+
     
     logger.info("\n=== Results ===")
 
     logger.info("CDD Minimal Input: %s", cdd_result)     
     logger.info("ProbDD Minimal Input: %s", probdd_result)
     logger.info("DD Minimal Input: %s", dd_result)
-
