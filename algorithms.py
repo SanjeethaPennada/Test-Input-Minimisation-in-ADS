@@ -1,5 +1,3 @@
-#Automated code to compare various test-input minimisation algorithms for scenario simplification in ADS 
-
 import itertools
 import json
 import logging
@@ -11,15 +9,15 @@ import time
 from enum import Enum
 from typing import Callable, Sequence, Any, Tuple, List, Optional
 
-# Outcome
+
+
 class Outcome(Enum):
-    PASS = 'PASS'  # Collision 
-    FAIL = 'FAIL'  # No Collision 
+    PASS = 'PASS'  # Collision (property not satisfied)
+    FAIL = 'FAIL'  # No Collision (property satisfied)
 
     def __repr__(self):
         return '<%s.%s>' % (self.__class__.__name__, self.name)
 
-# ZellerSplit for DD
 class ZellerSplit(object):
   
     def __init__(self, n=2):
@@ -116,7 +114,7 @@ class ConfigCache(OutcomeCache):
         return ''.join(s)
 
 
-# Logging utility
+
 class utils:
     @staticmethod
     def generate_log(indices, prefix, print_idx=True, threshold=30):
@@ -125,7 +123,6 @@ class utils:
         return f"\t{prefix}: {[f'idx={i}' if print_idx else i for i in indices]}"
 
 
-# AbstractCDD class
 class AbstractCDD:
     
     def __init__(self, test, split, id_prefix=(), other_config=None):
@@ -164,7 +161,7 @@ class AbstractCDD:
 
         self.current_best_config_idx = [True for _ in range(len(config))]
 
-        assert self._test_config(self.current_best_config_idx, ('assert',)) is Outcome.FAIL
+        assert self._test_config(self.current_best_config_idx, ('assert',)) is Outcome.PASS
 
         logger.info('Run #%d', 0)
         logger.info('\tConfig size: %d', self.get_current_config_size())
@@ -198,7 +195,7 @@ class AbstractCDD:
             for idx in config_idx_to_delete:
                 config_to_keep[idx] = False
             outcome = self._test_config(config_to_keep, config_log_id)
-          
+            # FAIL means current variant cannot satisfy the property
 
             if outcome is Outcome.FAIL:
                 self.update_when_pass(config_idx_to_delete)
@@ -395,7 +392,7 @@ class AbstractCDD:
         return ' / '.join(str(i) for i in config_id)
         
         
-# CarlaCDD subclass for CDD and ProbDD
+
 class CarlaCDD(AbstractCDD):
     def _processElementToPreserve(self, toBePreserve):
         return toBePreserve
@@ -433,7 +430,7 @@ class AbstractDD(object):
         self.original_config_idx = list(range(self.original_config_size))
         current_config_idx = self.original_config_idx[:]
 
-        assert self._test_config(current_config_idx, ('assert',)) is Outcome.FAIL
+        assert self._test_config(current_config_idx, ('assert',)) is Outcome.PASS
 
         if self.start_from_n:
             subsets = split_list(self.original_config_idx, self.start_from_n)
@@ -472,7 +469,7 @@ class AbstractDD(object):
                 subsets = next_subsets
                 logger.info('\tIncreased granularity')
             else:
-             # Minimisation ends if no interesting configuration was found by the finest splitting.
+             # Minimization ends if no interesting configuration was found by the finest splitting.
                 logger.info("\tFinal result: %d/%d", len(flatten(subsets)), self.original_config_size)
                 logger.info("Execution time at this level: %.6f s", time.time() - time_start)
                 return self.idx2config(current_config_idx)
@@ -534,7 +531,6 @@ class AbstractDD(object):
         return config
 
 
-
 class CarlaDD(AbstractDD):
     def _processElementToPreserve(self, toBePreserve):
         return toBePreserve
@@ -543,7 +539,7 @@ class CarlaDD(AbstractDD):
         return config, outcome
 
 
-# Utility functions from AbstractDD
+
 def split_list(input_list, chunk_size):
     return [input_list[i:i + chunk_size] for i in range(0, len(input_list), chunk_size)]
 
@@ -552,7 +548,7 @@ def flatten(l):
     return [item for sublist in l for item in sublist]
 
 
-# CARLA simulation inputs for SID 3
+# CARLA simulation inputs
 
 building_ids = [
         12323576063094642555,
@@ -793,11 +789,12 @@ logger.setLevel(logging.INFO)
 
 def run_dd(dd_type):
     initial_test_input =   npc_ids +  weather_time_conditions + building_ids + streetlight_ids
-    #other test inputs: 
-    #weather_time_conditions + npc_ids + streetlight_ids + building_ids,
-    #building_ids + npc_ids + streetlight_ids + weather_time_conditions,
-    #streetlight_ids + weather_time_conditions + npc_ids + building_ids, and
-    #building_ids + streetlight_ids + weather_time_conditions + npc_ids.
+
+
+
+
+
+
 
     logger.info("Initial Test Input: %s", initial_test_input)
     logger.info(f"Running {dd_type.upper()}...")
@@ -848,19 +845,17 @@ def run_dd(dd_type):
 
 if __name__ == "__main__":
         
-    logger.info("\n=== DD Run ===")
-    dd_result = run_dd("dd")
-
-	logger.info("=== CDD Run ===")
+    logger.info("=== CDD Run ===")
     cdd_result = run_dd("cdd")
    
     logger.info("\n=== ProbDD Run ===")
     probdd_result = run_dd("probdd")
 
+    logger.info("\n=== DD Run ===")
+    dd_result = run_dd("dd")
+    
     logger.info("\n=== Results ===")
-  
-    logger.info("DD Minimal Input: %s", dd_result)
+
     logger.info("CDD Minimal Input: %s", cdd_result)     
     logger.info("ProbDD Minimal Input: %s", probdd_result)
- 
-
+    logger.info("DD Minimal Input: %s", dd_result)
