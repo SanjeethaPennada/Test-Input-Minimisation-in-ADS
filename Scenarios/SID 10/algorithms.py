@@ -12,8 +12,8 @@ from typing import Callable, Sequence, Any, Tuple, List, Optional
 
 
 class Outcome(Enum):
-    PASS = 'PASS'  # Collision (property not satisfied)
-    FAIL = 'FAIL'  # No Collision (property satisfied)
+    PASS = 'PASS'  # No Collision (property not satisfied)
+    FAIL = 'FAIL'  # Collision (property satisfied)
 
     def __repr__(self):
         return '<%s.%s>' % (self.__class__.__name__, self.name)
@@ -161,7 +161,7 @@ class AbstractCDD:
 
         self.current_best_config_idx = [True for _ in range(len(config))]
 
-        assert self._test_config(self.current_best_config_idx, ('assert',)) is Outcome.PASS
+        assert self._test_config(self.current_best_config_idx, ('assert',)) is Outcome.FAIL
 
         logger.info('Run #%d', 0)
         logger.info('\tConfig size: %d', self.get_current_config_size())
@@ -430,7 +430,7 @@ class AbstractDD(object):
         self.original_config_idx = list(range(self.original_config_size))
         current_config_idx = self.original_config_idx[:]
 
-        assert self._test_config(current_config_idx, ('assert',)) is Outcome.PASS
+        assert self._test_config(current_config_idx, ('assert',)) is Outcome.FAIL
 
         if self.start_from_n:
             subsets = split_list(self.original_config_idx, self.start_from_n)
@@ -784,21 +784,20 @@ def run_dd(dd_type):
     logger.info("Total number of test steps: %d", test_count)
     return minimal_input
 
-
 if __name__ == "__main__":
         
-    logger.info("=== CDD Run ===")
+    logger.info("\n=== DD Run ===")
+    dd_result = run_dd("dd")
+
+	logger.info("=== CDD Run ===")
     cdd_result = run_dd("cdd")
    
     logger.info("\n=== ProbDD Run ===")
     probdd_result = run_dd("probdd")
 
-    logger.info("\n=== DD Run ===")
-    dd_result = run_dd("dd")
-    
     logger.info("\n=== Results ===")
-
+  
+    logger.info("DD Minimal Input: %s", dd_result)
     logger.info("CDD Minimal Input: %s", cdd_result)     
     logger.info("ProbDD Minimal Input: %s", probdd_result)
-    logger.info("DD Minimal Input: %s", dd_result)
 
