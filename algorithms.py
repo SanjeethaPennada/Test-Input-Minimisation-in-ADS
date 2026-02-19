@@ -164,7 +164,7 @@ class AbstractCDD:
 
         self.current_best_config_idx = [True for _ in range(len(config))]
 
-        assert self._test_config(self.current_best_config_idx, ('assert',)) is Outcome.PASS
+        assert self._test_config(self.current_best_config_idx, ('assert',)) is Outcome.FAIL
 
         logger.info('Run #%d', 0)
         logger.info('\tConfig size: %d', self.get_current_config_size())
@@ -433,7 +433,7 @@ class AbstractDD(object):
         self.original_config_idx = list(range(self.original_config_size))
         current_config_idx = self.original_config_idx[:]
 
-        assert self._test_config(current_config_idx, ('assert',)) is Outcome.PASS
+        assert self._test_config(current_config_idx, ('assert',)) is Outcome.FAIL
 
         if self.start_from_n:
             subsets = split_list(self.original_config_idx, self.start_from_n)
