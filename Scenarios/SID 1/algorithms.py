@@ -12,8 +12,8 @@ from typing import Callable, Sequence, Any, Tuple, List, Optional
 
 # Outcome enum compatible with both AbstractCDD and AbstractDD
 class Outcome(Enum):
-    PASS = 'PASS'  # Collision (property not satisfied)
-    FAIL = 'FAIL'  # No Collision (property satisfied)
+    PASS = 'PASS'  
+    FAIL = 'FAIL'  
 
     def __repr__(self):
         return '<%s.%s>' % (self.__class__.__name__, self.name)
