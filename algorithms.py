@@ -848,18 +848,19 @@ def run_dd(dd_type):
 
 if __name__ == "__main__":
         
-    logger.info("=== CDD Run ===")
+    logger.info("\n=== DD Run ===")
+    dd_result = run_dd("dd")
+
+	logger.info("=== CDD Run ===")
     cdd_result = run_dd("cdd")
    
     logger.info("\n=== ProbDD Run ===")
     probdd_result = run_dd("probdd")
 
-    logger.info("\n=== DD Run ===")
-    dd_result = run_dd("dd")
-    
     logger.info("\n=== Results ===")
-
+  
+    logger.info("DD Minimal Input: %s", dd_result)
     logger.info("CDD Minimal Input: %s", cdd_result)     
     logger.info("ProbDD Minimal Input: %s", probdd_result)
-    logger.info("DD Minimal Input: %s", dd_result)
+ 
 
