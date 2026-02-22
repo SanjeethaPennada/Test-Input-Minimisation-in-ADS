@@ -53,7 +53,9 @@ chmod +x setup_carla.sh
 Make sure to install all the required packages from [requirements.txt](https://github.com/SanjeethaPennada/Test-Input-Minimisation-in-ADS/blob/main/requirements.txt)
 
 ### Initial checks before running the code
-Please make sure the "CARLA_ROOT" ("./carla_server" by default) and "Test-Input-Minimisation-in-ADS_ROOT" (if present), the environment variables are set correctly in all the bash scripts. Make sure [best_model.pth](https://github.com/SanjeethaPennada/Test-Input-Minimisation-in-ADS/blob/main/driving_agents/king/transfuser/model_checkpoints/regular/transfuser/best_model.pth) has been downloaded to run [TransFuser](https://github.com/autonomousvision/transfuser) agent.The following script will compare different test-input minimisation algorithms for scenario simplification in ADS. 
+Please make sure the "CARLA_ROOT" ("./carla_server" by default) and "Test-Input-Minimisation-in-ADS_ROOT" (if present), the environment variables are set correctly in all the bash scripts. 
+Make sure [best_model.pth](https://github.com/SanjeethaPennada/Test-Input-Minimisation-in-ADS/blob/main/driving_agents/king/transfuser/model_checkpoints/regular/transfuser/best_model.pth) has been downloaded inorder to run [TransFuser](https://github.com/autonomousvision/transfuser) agent.
+The following script will compare different test-input minimisation algorithms for scenario simplification in ADS. 
 
 ## DD Vs ProbDD Vs CDD for ADS Scenario Simplification
 #### Example: Scenario ID 3
