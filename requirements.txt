@@ -60,11 +60,6 @@ ipython==7.27.0
 jedi==0.18.0
 joblib==1.0.1
 kiwisolver==1.3.1
-launch==0.17.2
-launch-testing==0.17.2
-launch-testing-ros==0.14.5
-launch-xml==0.17.2
-launch-yaml==0.17.2
 locket==0.2.1
 lxml==4.6.3
 Markdown==3.3.4
@@ -86,7 +81,6 @@ nvidia-cudnn-cu11==8.5.0.96
 oauthlib==3.1.1
 olefile==0.46
 opencv-python==4.5.2.54
-osrf-pycommon==2.0.0
 packaging==21.0
 pandas==1.3.4
 parso==0.8.2
@@ -128,8 +122,6 @@ qt-gui==2.0.1
 qt-gui-cpp==2.0.1
 qt-gui-py-common==2.0.1
 quality-of-service-demo-py==0.14.4
-rclpy==1.9.3
-rcutils==4.0.4
 regex==2021.11.2
 requests==2.25.1
 requests-oauthlib==1.3.0
@@ -147,16 +139,10 @@ six==1.16.0
 slurm-gpustat==0.0.12
 smclib==3.0.1
 smmap==4.0.0
-sros2==0.10.3
 subprocess32==3.5.4
 tabulate==0.8.9
 teleop-twist-keyboard==2.3.2
 terminaltables==3.1.10
-tf2-geometry-msgs==0.17.5
-tf2-kdl==0.17.5
-tf2-py==0.17.5
-tf2-ros-py==0.17.5
-tf2-tools==0.17.5
 threadpoolctl==2.2.0
 tifffile==2020.10.1
 timm==0.4.12
@@ -181,7 +167,6 @@ watchdog==2.1.6
 wcwidth==0.2.5
 webdataset==0.1.76
 Werkzeug==1.0.1
-xacro==2.0.7
 yapf==0.31.0
 yarg==0.1.10
 yarl==1.6.3
