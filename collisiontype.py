@@ -20,7 +20,6 @@ except IndexError:
 # KING collision clusters (updated to match the figure)
 KING_CLUSTERS = {
     'a': 'Merge',
-    'b': 'Behind',
     'c': 'Cut-off',
     'e': 'Head-on',
     'f': 'T-bone',
@@ -174,7 +173,7 @@ class CollisionMonitor:
             if pos == 'front':
                 return 'c'  # Cut-off
             elif pos == 'rear':
-                return 'b' if 170 <= angle <= 190 else 'a'  # Behind or Merge
+                return 'a' if 170 <= angle <= 190 else 'a'  #Merge 
         elif move == 'opposite_direction':
             return 'e' if 320 <= angle <= 360 or 170 <= angle <= 190 else 'g'  # Head-on or Front
         elif move == 'other':
@@ -236,4 +235,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
